@@ -1,6 +1,3 @@
-// var monsterURL =
-//   "https://app.pixelencounter.com/odata/basic/monsterdetails?$top=int&$orderby=string&$skip=int&$count=bool";
-
 //website currently only displays content on refresh
 var randomDog = "https://dog.ceo/api/breeds/image/random";
 var dogBreedURL = "https://dog.ceo/api/breed/";
@@ -13,7 +10,23 @@ window.onload = function () {
     var wordFQuiz = existingWords[i].word;
     var dForQuiz = existingWords[i].definition;
     var dogPic = existingDogs[i].dog;
-    $(".card").append("<div>","<br>", wordFQuiz, ": ", dForQuiz, "<br>","<img src ='" + dogPic + "'/>","</div>");
+    var wAndDogCard =
+      "<div class='card'>" +
+      "<br>" +
+      "<h1>" +
+      wordFQuiz +
+      " </h1>" +
+      "<br>" +
+      "<img src ='" +
+      dogPic +
+      "'/>" +
+      "<h4>" +
+      dForQuiz +
+      "</h4>" +
+      "<br>" +
+      "</div>";
+
+    $(".cardsList").append(wAndDogCard);
   }
 };
 
@@ -38,24 +51,20 @@ $("#search").click(function () {
       //$(".words").append("<br>", currentWord, ": ", currentDefinition, "<br>");
     }
   );
-});
-
-//adds dog image to local storage after searching for dog breed
-//var dogs = $(".dogs");
-$(".addImg").click(function () {
-  var dogBreed = $("#breed").val();
-  $.get(dogBreedURL + dogBreed + "/images", function (data) {
+  //var dogBreed = $("#breed").val();
+  $.get(dogBreedURL + cWord + "/images", function (data) {
     console.log(data.message[0]);
-    
+
     var existingDogs = JSON.parse(localStorage.getItem("allDogs"));
     if (existingDogs == null) existingDogs = [];
     var currentDog = data.message[0];
     var dogList = {
       dog: currentDog,
     };
-    localStorage.setItem("enteredDog",JSON.stringify(dogList));
+    localStorage.setItem("enteredDog", JSON.stringify(dogList));
     existingDogs.push(dogList);
-    localStorage.setItem("allDogs",JSON.stringify(existingDogs));
+    localStorage.setItem("allDogs", JSON.stringify(existingDogs));
     //$(".words").append("<img src ='" + data.message[0] + "'/>");
+    location.reload();
   });
 });
