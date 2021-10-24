@@ -1,6 +1,50 @@
 //website currently only displays content on refresh
-var randomDog = "https://dog.ceo/api/breeds/image/random";
+
+//var randomDog = "https://dog.ceo/api/breeds/image/random";
 var dogBreedURL = "https://dog.ceo/api/breed/";
+//var randomDogBreedURL = "https://dog.ceo/api/breed/";
+
+
+//doberman is in dog api as 'doberman' but in dictionary api as 'dobermann'; if you want to see dobermans, you must type 'doberman' in the search box
+//breeds that can be searched 
+var acceptableSearch = [
+  "beagle",
+  "borzoi",
+  "bouvier",
+  "chihuahua",
+  "coonhound",
+  "corgi",
+  "dachshund",
+  "dalmatian",
+  "deerhound",
+  "doberman",
+  "elkhound",
+  "greyhound",
+  "keeshond",
+  "komondor",
+  "labradoodle",
+  "labrador",
+  "leonberg",
+  "malamute",
+  "mastiff",
+  "newfoundland",
+  "papillon",
+  "pekinese",
+  "pitbull",
+  "pomeranian",
+  "poodle",
+  "pug",
+  "redbone",
+  "rottweiler",
+  "saluki",
+  "schipperke",
+  "schnauzer",
+  "setter",
+  "sheepdog",
+  "weimaraner",
+  "whippet",
+  "wolfhound",
+];
 window.onload = function () {
   var existingWords = JSON.parse(localStorage.getItem("allWords"));
   if (existingWords == null) existingWords = [];
@@ -33,7 +77,12 @@ window.onload = function () {
 //function for displaying words and their definitions; stores words and defs in local storage to get displayed
 $("#search").click(function () {
   var cWord = $("#word").val();
-  // var currentWordList;
+  if(!acceptableSearch.includes(cWord)){
+  $("#word").val("");
+  cWord=$("#word").val();
+  $("#errorMessage").css("visibility","visible");
+  }
+  //$("#errorMessage").css("visibility","hidden");
   $.get(
     "https://api.dictionaryapi.dev/api/v2/entries/en/" + cWord,
     function (data) {
@@ -48,10 +97,9 @@ $("#search").click(function () {
       localStorage.setItem("enteredWord", JSON.stringify(wordList));
       existingWords.push(wordList);
       localStorage.setItem("allWords", JSON.stringify(existingWords));
-      //$(".words").append("<br>", currentWord, ": ", currentDefinition, "<br>");
     }
   );
-  //var dogBreed = $("#breed").val();
+
   $.get(dogBreedURL + cWord + "/images", function (data) {
     console.log(data.message[0]);
 
@@ -59,12 +107,12 @@ $("#search").click(function () {
     if (existingDogs == null) existingDogs = [];
     var currentDog = data.message[0];
     var dogList = {
-      dog: currentDog,
+      dog: currentDog
     };
     localStorage.setItem("enteredDog", JSON.stringify(dogList));
     existingDogs.push(dogList);
     localStorage.setItem("allDogs", JSON.stringify(existingDogs));
-    //$(".words").append("<img src ='" + data.message[0] + "'/>");
+
     location.reload();
   });
 });
