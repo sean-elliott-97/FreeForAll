@@ -47,7 +47,7 @@ var existingDogs = JSON.parse(localStorage.getItem("dogsList"));
 if (existingDogs == null) existingDogs = [];
 else {
   
-  
+  $("#clear").css("visibility","visible");
   $(".cardsList").append(existingDogs);
 }
 
@@ -58,9 +58,10 @@ $("#search").click(function () {
     $("#errorMessage").css("visibility", "visible");
     return;
   }
-  $("errorMessage").css("visibility","invisible");
+  else{
+  $("#errorMessage").css("visibility","hidden");
   dogBreed = $("#breed").val();
-
+  }
   fetch(`https://dog.ceo/api/breed/${dogBreed}/images/random`)
     .then((response) => response.json())
     .then((data) => {
