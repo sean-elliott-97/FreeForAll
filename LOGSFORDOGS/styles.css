@@ -1,0 +1,19 @@
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  .card{
+    border-radius: 5px; /* 5px rounded corners */
+    width: 60%;
+    display:flex;
+    
+    flex-wrap: wrap;
+  }
+      
