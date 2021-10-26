@@ -1,7 +1,7 @@
 var wordSearch = $("#word").val();
 var dogData;
 var dictionaryData;
-//doberman is in dog api as 'doberman' but in dictionary api as 'dobermann'; if you want to see dobermans, you must type 'doberman' in the search box
+
 //breeds that can be searched
 var acceptableSearch = [
   "beagle",
@@ -46,28 +46,29 @@ var acceptableSearch = [
 var existingDogs = JSON.parse(localStorage.getItem("dogsList"));
 if (existingDogs == null) existingDogs = [];
 else {
-  
-  $("#clear").css("visibility","visible");
+  $("#clear").css("visibility", "visible");
   $(".cardsList").append(existingDogs);
 }
 
+//allows users to search for random dog images by breed; creates a card with random dog image, breed and definition
 $("#search").click(function () {
-  if (!acceptableSearch.includes($("#breed").val())==true) {
+  if (!acceptableSearch.includes($("#breed").val()) == true) {
     $("#breed").val("");
 
     $("#errorMessage").css("visibility", "visible");
     return;
+  } else {
+    $("#errorMessage").css("visibility", "hidden");
+    dogBreed = $("#breed").val();
   }
-  else{
-  $("#errorMessage").css("visibility","hidden");
-  dogBreed = $("#breed").val();
-  }
+  $(".cardsList").append('');
   fetch(`https://dog.ceo/api/breed/${dogBreed}/images/random`)
     .then((response) => response.json())
     .then((data) => {
       dogData = data;
 
       dogPicture = dogData.message;
+      
       fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${dogBreed}`)
         .then((response) => response.json())
         .then((data) => {
@@ -86,12 +87,16 @@ $("#search").click(function () {
 
           $(".cardsList").append(x);
           localStorage.setItem("dogsList", JSON.stringify(existingDogs));
+          
         });
+       
+     
     });
-    $("#clear").css("visibility","visible");
+  $("#clear").css("visibility", "visible");
 });
-$("#clear").click(function(){
-localStorage.clear();
-location.reload();
 
-})
+//clears local storage
+$("#clear").click(function () {
+  localStorage.clear();
+  location.reload();
+});
