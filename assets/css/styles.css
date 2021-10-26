@@ -1,0 +1,54 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.card {
+  border-radius: 5px; /* 5px rounded corners */
+  width: 300px;
+  display: flex;
+
+  flex-wrap: wrap;
+}
+.cardsList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+img {
+  width: 298px;
+  height: 200px;
+}
+#listOfDogs {
+  font-size: 20px;
+}
+
+/*capitalizes the dog breed name*/
+.dogBreedName {
+  text-transform: capitalize;
+  text-align: center;
+
+  font-family: "Courier New", Courier, monospace;
+}
+
+.dogDefinition {
+  font-family: "Courier New", Courier, monospace;
+}
+
+/*capiptalizes the dog breed name in the list of acceptable dog breeds*/
+#listOfDogs {
+  text-align: center;
+  border-style: double;
+  text-transform: capitalize;
+  background-color: cadetblue;
+  font-weight: 700px;
+}
+
+#instructions {
+  border-style: dotted;
+}
