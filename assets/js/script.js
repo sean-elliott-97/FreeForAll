@@ -1,4 +1,3 @@
-var wordSearch = $("#word").val();
 var dogData;
 var dictionaryData;
 //displays when image is loading

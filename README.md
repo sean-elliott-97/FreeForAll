@@ -12,6 +12,14 @@ Additionally, a clear button will be displayed, that allows users to clear the c
 
 If the user leaves the webpage and comes back, the added cards will remain.
 
+Technologies used:
+Bootstrap: https://getbootstrap.com/
+Materialize: https://materializecss.com/
+Free Dictionary API: https://dictionaryapi.dev/
+Dog API: https://dog.ceo/dog-api/
+jQuery: https://jquery.com/
+
+
 Main page screenshot:
 
 ![mainPage](https://user-images.githubusercontent.com/89947920/139471430-dd6f8cd6-e265-428a-9de7-49a4c93f390c.png)
